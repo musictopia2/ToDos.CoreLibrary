@@ -1,0 +1,13 @@
+﻿<LeftOverLayout>
+    <TopContent>
+        <MainToDoBarComponent MainToDo="MainToDo" />
+    </TopContent>
+    <MainContent>
+        <TextAreaComponent UseLeftOvers="true" @bind-Value="_notes" />
+    </MainContent>
+    <BottomContent>
+        <PrimaryButton OnClick="SaveAsync">
+            Save Notes
+        </PrimaryButton>
+    </BottomContent>
+</LeftOverLayout>

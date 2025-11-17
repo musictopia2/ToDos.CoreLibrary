@@ -1,0 +1,45 @@
+﻿@if (DataContext!.Loaded == false)
+{
+    return;
+}
+<StackLayout Orientation="EnumOrientation.Vertical"
+             Overflow="EnumOverflowCategory.Scrollable"
+             >
+    <StackItem Length="auto">
+        <MainToDoBarComponent MainToDo="DataContext.MainToDo" />
+    </StackItem>
+    <StackItem Length="1fr" Scrollable="true">
+        <RawTextViewerComponent Width="100%" Text="@MainToDo!.Notes" />
+    </StackItem>
+    <StackItem Length="3fr" Scrollable="true">
+        @* 
+        attempt to make it where if there is no item, then can have that template.  not sure if i need better naming.  if so, has to look to see what companies like sync fusion, etc, does it.    
+        *@
+        @if (DataContext.SubList.Count == 0)
+        {
+            <div>There are no sub todo items currently</div>
+            return;
+        }
+        <MultipleSelectedItemsListView TValue="ToDoDetailModel"
+                                       Headers="_headers"
+                                       ItemList="DataContext.SubList"
+                                       OnChangeSelectedItems="RefreshAsync"
+                                       Context="item"
+                                       SelectedList="DataContext.MasterList">
+            <LabelCell>
+                @item.DateCreated
+            </LabelCell>
+            <FlexibleCell ColumnWidth="300px" HasRowGap="true">
+                @item.Title
+            </FlexibleCell>
+            <FlexibleCell ColumnWidth="900px" HasRowGap=true>
+                <TextAreaComponent @bind-Value="item.Notes"
+                                   ReadOnly="true"
+                                   Rows="8" />
+            </FlexibleCell>
+            <LabelCell>
+                @item.DateModified
+            </LabelCell>
+        </MultipleSelectedItemsListView>                     
+    </StackItem>
+</StackLayout>

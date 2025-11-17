@@ -1,0 +1,33 @@
+﻿@if (DataContext is null || DataContext.Loaded == false)
+{
+    return;
+}
+@if (DataContext.FullToDos.Any() == false)
+{
+    <div>There are no items to do currently</div>
+    return;
+}
+<SingleSelectedItemListView Headers="_headers"
+                            TValue="ToDoMainModel"
+                            ItemList="DataContext.FullToDos"
+                            SelectedItem="DataContext.SelectedMainToDo"
+                            SelectedItemChanged="ChangeItem"
+                            Context="item">
+    <LabelCell>
+        @item.DateEntered
+    </LabelCell>
+    <FlexibleCell ColumnWidth="300px" HasRowGap="true">
+        @item.Title
+    </FlexibleCell>
+    <LabelCell RowGap="10px">
+        @item.Category
+    </LabelCell>
+    <FlexibleCell ColumnWidth="700px" HasRowGap=true>
+        <TextAreaComponent @bind-Value="item.Notes"
+                           ReadOnly="true"
+                           Rows="6" />
+    </FlexibleCell>
+    <LabelCell>
+        @item.DateModified
+    </LabelCell>
+</SingleSelectedItemListView>

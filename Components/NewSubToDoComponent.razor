@@ -1,0 +1,30 @@
+﻿<InputTabOrderNavigationContainer>
+    <SubmitForm Model="_model"
+                FullHeight="true"
+                OnValidSubmit="SaveAsync">
+        <LeftOverLayout>
+            <TopContent>
+                <MainToDoBarComponent MainToDo="MainToDo" />
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div>
+                    <InputEnterText Placeholder="Title"
+                                    FullWidth="true"
+                                    FocusFirst="true"
+                                    @bind-Value="@_model.Title" />
+                </div>
+            </TopContent>
+            <MainContent>
+                <InputEnterTextArea UseLeftOvers="true"
+                                    Placeholder="Notes"
+                                    @bind-Value="@_model.Notes" />
+            </MainContent>
+            <BottomContent>
+                <SubmitButton class="btn btn-primary">
+                    Create New ToDo Item
+                </SubmitButton>
+            </BottomContent>
+        </LeftOverLayout>
+    </SubmitForm>
+</InputTabOrderNavigationContainer>

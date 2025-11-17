@@ -1,0 +1,13 @@
+﻿<PrimaryButton IsEnabled="FullEnabled" OnClick="() => PrivateClick(EnumToDoStage.Full)">
+    Full ToDo List
+</PrimaryButton>
+<PrimaryButton IsEnabled="MasterEnabled" OnClick="() => PrivateClick(EnumToDoStage.Master)">
+    Master ToDo List
+</PrimaryButton>
+@if (CanGoBackToMainItem == false)
+{
+    return;
+}
+<PrimaryButton OnClick="OnBackToMainItem">
+    Back To Main ToDo Item
+</PrimaryButton>

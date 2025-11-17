@@ -1,0 +1,81 @@
+﻿<LeftOverLayout>
+    <TopContent>
+        <TopComponent Stage="_mainStage"
+                      StageChanged="StageChanged"
+                      OnBackToMainItem="EditSelectedItem"
+                      CanGoBackToMainItem="_editStage > EnumEditStage.None" />
+    </TopContent>
+    <MainContent>
+        @if (_mainStage == EnumToDoStage.Master)
+        {
+            <MasterGridComponent OnChangedItem="StartEditItem" />
+            return;
+        }
+        @if (_mainStage == EnumToDoStage.Full)
+        {
+            <FullGridComponent OnChangedItem="StartEditItem" />
+            return;
+        }
+         @if (IsEditingMasterItem)
+        {
+            <EditMasterToDoComponent OnRefresh="UpdatedMaster" />
+            return;
+        }
+        @if (IsEditingFirstMainItem)
+        {
+            <EditMainToDoFirstMainComponent MainToDo="@FullShellDataContext!.SelectedMainToDo"
+                OnRefresh="RefreshAsync"
+            />
+            return;
+        }
+        @if (_mainStage == EnumToDoStage.NewMainToDo)
+        {
+            <NewMainToDoComponent OnNewToDoCreated="CreateNewItem" />
+            return;
+        }
+        @if (_editStage == EnumEditStage.NewSubItem)
+        {
+            <NewSubToDoComponent MainToDo="EditMainToDoEditDataContext!.MainToDo"
+                                 OnCreatedSubToDo="EditSelectedItem" />
+            return;
+        }
+        @if (_editStage == EnumEditStage.MainNotes)
+        {
+            <EditMainToDoNotesComponent MainToDo="EditMainToDoEditDataContext!.MainToDo"
+                                        OnSavedNotes="EditSelectedItem" />
+            return;
+        }
+        @if (_editStage != EnumEditStage.SubNotes)
+        {
+            return;
+        }
+        <EditSubToDoNotesComponent MainToDo="EditMainToDoEditDataContext!.MainToDo"
+                                   SubToDo="EditMainToDoEditDataContext.SelectedItem"
+                                   OnComplete="CompleteSubItem" />
+    </MainContent>
+    <BottomContent>
+        @if (_mainStage == EnumToDoStage.Master)
+        {
+            <MasterMainBarComponent EditSelectedItem="EditSelectedItem"
+                                    Refresh="RefreshAsync"
+                                    DataContext="MasterShellDataContext" />
+            return;
+        }
+        @if (_mainStage == EnumToDoStage.Full)
+        {
+            <FullMainBarComponent EditSelectedItem="EditSelectedItem"
+                                  OnNewToDoClick="StartNewMainToDoItem"
+                                  DataContext="FullShellDataContext" />
+            return;
+        }
+        @if (IsEditingFirstMainItem == false)
+        {
+            return;
+        }
+        <EditMainToDoFirstBarComponent OnReloadFull="UpdatedFull"
+                                       DataContext="EditMainToDoEditDataContext"
+                                       OnEditSubNotes="StartEditSubNotes"
+                                       OnCreateNewSubItem="StartCreatingSubItem"
+                                       OnEditMainNotes="StartEditMainNotes" />
+    </BottomContent>
+</LeftOverLayout>

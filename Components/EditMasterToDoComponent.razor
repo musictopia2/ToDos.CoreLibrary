@@ -1,0 +1,22 @@
+﻿<LeftOverLayout>
+    <TopContent>
+        <LabelPairComponent HeaderText="Todo Title" MainText="@MasterToDoItem.Title" />
+        <LabelPairComponent HeaderText="Category" MainText="@MasterToDoItem.Category" />
+        <LabelPairComponent HeaderText="Date Modified" MainText="@MasterToDoItem.DateModified" />
+    </TopContent>
+    <MainContent>
+        <TextAreaComponent MainHotKey="ConsoleKey.F1" HotKeyPressed="SaveNotesAsync" FullPage="true" @bind-Value="MasterToDoItem.Notes" />
+    </MainContent>
+    <BottomContent>
+        <PrimaryButton OnClick="SaveNotesAsync">
+            Save Notes (F1 When Focused On Notes)
+        </PrimaryButton>
+        <PrimaryButton OnClick="CompleteToDoItemAsync">
+            Complete Item
+        </PrimaryButton>
+        <PrimaryButton OnClick="RemoveFromListAsync">
+            Remove From Master List
+        </PrimaryButton>
+        @_status
+    </BottomContent>
+</LeftOverLayout>

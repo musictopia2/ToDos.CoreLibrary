@@ -1,0 +1,28 @@
+﻿@if (DataContext!.MainToDo is null)
+{
+    <p>Must have a main todo item.  Rethink</p>
+    return;
+}
+<PrimaryButton IsEnabled="DataContext.SelectedItem is not null" OnClick="OnEditSubNotes">
+    Edit Selected ToDo Item
+</PrimaryButton>
+<PrimaryButton OnClick="OnCreateNewSubItem">
+    New ToDo Item
+</PrimaryButton>
+<PrimaryButton IsEnabled="DataContext.MasterList.Count == 0" OnClick="CompleteItemAsync">
+    Complete ToDo Item
+</PrimaryButton>
+<PrimaryButton OnClick="OnEditMainNotes">
+    Edit Notes
+</PrimaryButton>
+<div>
+    <PrimaryButton IsEnabled="DataContext.SubList.Count > 0" OnClick="DataContext.PutAllSubToMasterListAsync">
+        All To Master
+    </PrimaryButton>
+    <PrimaryButton IsEnabled="DataContext.MasterList.Count > 0" OnClick="DataContext.PutSelectedSubToMasterListAsync">
+        Selected To Master
+    </PrimaryButton>
+    <PrimaryButton IsEnabled="DataContext.SubList.Count == 0" OnClick="DataContext.PutMainToMasterListAsync">
+        Main ToDo To Master
+    </PrimaryButton>
+</div>

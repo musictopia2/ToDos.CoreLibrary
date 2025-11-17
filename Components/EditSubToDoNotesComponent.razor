@@ -1,0 +1,25 @@
+﻿<LeftOverLayout>
+    <TopContent>
+        <MainToDoBarComponent MainToDo="MainToDo" />
+        <div>
+            <LabelPairComponent HeaderText="Detail Todo Title" MainText="@SubToDo!.Title" />
+            <LabelPairComponent HeaderText="Date Created" MainText="@SubToDo.DateCreated" />
+            <LabelPairComponent HeaderText="Date Modified" MainText="@SubToDo.DateModified" />
+        </div>
+    </TopContent>
+    <MainContent>
+        <TextAreaComponent MainHotKey="ConsoleKey.F1" HotKeyPressed="SaveAsync" FullPage="true" @bind-Value="SubToDo!.Notes" />
+    </MainContent>
+    <BottomContent>
+        <PrimaryButton OnClick="SaveAsync">
+            Save Detail Notes (F1 When Focused On Notes)
+        </PrimaryButton>
+        <PrimaryButton OnClick="CompleteAsync">
+            Complete ToDo Item
+        </PrimaryButton>
+        <PrimaryButton OnClick="ToMasterAsync">
+            Put To Master List
+        </PrimaryButton>
+        @_status
+    </BottomContent>
+</LeftOverLayout>

@@ -1,0 +1,36 @@
+﻿@if (DataContext is null || DataContext.Loaded == false)
+{
+    return;
+}
+@if (DataContext.MasterList.Any() == false)
+{
+    <div>
+        There are nothing on the master todo list currently
+    </div>
+    return;
+}
+<SingleSelectedItemListView Headers="_headers"
+                            TValue="MasterToDoModel"
+                            ItemList="DataContext.MasterList"
+                            SelectedItem="DataContext.SelectedItem"
+                            SelectedItemChanged="ChangeItem"
+                            Context="item">
+                            
+    <NumberCell>
+        <NumberComponent @bind-Value="item.Priority" />
+    </NumberCell>
+    <FlexibleCell ColumnWidth="300px" HasRowGap="true">
+        @item.Title
+    </FlexibleCell>
+    <LabelCell RowGap="30px">
+        @item.Category
+    </LabelCell>
+    <FlexibleCell ColumnWidth="900px" HasRowGap=true>
+        <TextAreaComponent @bind-Value="item.Notes"
+                           ReadOnly="true"
+                           Rows="8" />
+    </FlexibleCell>
+    <LabelCell>
+        @item.DateModified
+    </LabelCell>
+</SingleSelectedItemListView>
