@@ -1,9 +1,0 @@
-﻿So far, i have the models and the basic services set up.
-
-the next steps:
-1.  look through the view models
-2.  go through the components for this as well.
-
-hint:
-would like to fix the bugs with the components.
-could be possible to improve for this version if possible.
